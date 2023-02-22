@@ -6,12 +6,11 @@
 </head>
 <body>
 	<h3>登録・更新</h3>
-	キー：<input type="text" id="newkey" /> <br>
-	バリュー：
+	件名<input type="text" id="newkey" /> <br>
+	本文
     <form action="#">
-        <textarea id="newvalue" name="本文" rows="3" cols="50" wrap="hard">本文</textarea>
+        <textarea id="newvalue" name="本文" rows="3" cols="50" wrap="hard"></textarea>
     </form>
-    <!--<input type="text" id="newvalue" /> -->
 	<input type="button" value="設定" onclick="setValue()"/>
 	<hr />
 	
@@ -74,7 +73,7 @@
 		}
 	}
 	
-	function getValue(event) {
+	function getValue(event) {  //件名を検索して本文表示
 		var key = document.getElementById("selectkey").value;
 		var result = document.getElementById("result");
 		result.innerHTML = "";
@@ -88,7 +87,22 @@
 			if (event.target.result === undefined) {
 				result.innerHTML = "指定したキーは存在しません。";
 			} else {
-				result.innerHTML = event.target.result.myvalue + "<br/>";
+				var MailText = "";
+
+				for (let i = 0; i < 1000; i++) {  //本文の上限の1000文字まで繰り返す
+					if(event.target.result.myvalue.slice(i,i+1) === undefined) {
+						//本文を読み込みきった場合はループから出る。
+						break;
+					}
+					if(event.target.result.myvalue.slice(i,i+1) === "\n") {
+						//改行があった場合
+						MailText = MailText + "<br/>";
+					}else {
+						MailText = MailText + event.target.result.myvalue.slice(i,i+1);
+					}
+				}
+
+				result.innerHTML = MailText + "<br/>";
 			}
 		}
 	}

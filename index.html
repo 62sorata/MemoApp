@@ -21,6 +21,8 @@
 	</ul>
 
 	<h3>タグの追加</h3>
+		新しいタグの追加
+		<input type="text" id="tag" /> 
 		<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
 	<hr />
 	
@@ -63,12 +65,22 @@
 		// データベースを削除したい場合はコメントを外します。
 		//indexedDB.deleteDatabase("mydb");
 		var openRequest = indexedDB.open("mydb", 1.0);
+		//データベース名を指定して接続。なければ新規作成される
+		
 		
 		openRequest.onupgradeneeded = function(event) {
 			// データベースのバージョンに変更があった場合(初めての場合もここを通ります。)
 			db = event.target.result;
+			console.log("OK");
+			//メモ内容の保存ストア
 			var store = db.createObjectStore("mystore", { keyPath: "mykey"});
 			store.createIndex("myvalueIndex", "myvalue");
+			
+
+			//タグリストの保存ストア
+			
+			var tagStore = db.createObjectStore("tagstore", { keyPath: "tagKey"});
+			tagStore.createIndex("tagValueIndex", "tagvalue");
 		}
 		
 		openRequest.onsuccess = function(event) {

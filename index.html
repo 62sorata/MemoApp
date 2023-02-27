@@ -16,8 +16,6 @@
 	
 	<ul id="addTag" class="nav nav-tabs nav-justified">
 		<a id="Tag" href="#" class="nav-link">全てのメモ</a>
-		<a href="#" class="nav-link">#買い物</a>
-		<a href="#" class="nav-link">#課題</a>
 	</ul>
 
 	<h3>タグの追加</h3>
@@ -85,10 +83,17 @@
 		
 		openRequest.onsuccess = function(event) {
 	        db = event.target.result;
+			Onload();
         }
 	} else {
 		window.alert("このブラウザではIndexed DataBase API は使えません。");
 	}
+
+
+	
+
+
+	
 	
 	function setValue(event) {
 		var key = document.getElementById("newkey").value;

@@ -19,9 +19,10 @@
 	</ul>
 
 	<h3>タグの追加</h3>
-		新しいタグの追加
+		新しいタグの追加・削除<br />
 		<input type="text" id="tag" /> 
 		<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
+		<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
 	<hr />
 	
 	<h3>登録・更新</h3>
@@ -46,14 +47,21 @@
 	<input type="button" value="削除" onclick="deleteValue()"/>
 	<input type="button" value="全削除" onclick="deleteAll()"/>
 	<hr />
-	
+	<!--
 	<h3>インデックスを使った検索</h3>
 	<input type="text" id="selectValue1" />～<input type="text" id="selectValue2" />
 	<input type="button" value="検索" onclick="getKey()"/>
 	<hr />
-	
+	-->
+	<div id="addDetails">
+		<details>
+			<summary>test</summary>
+				test
+		</details>
+	</div>	
+		
 	<h3>処理結果</h3>
-	<div id="result"/>
+	<div id="result">
 </body>
 
 <script>
@@ -89,11 +97,6 @@
 		window.alert("このブラウザではIndexed DataBase API は使えません。");
 	}
 
-
-	
-
-
-	
 	
 	function setValue(event) {
 		var key = document.getElementById("newkey").value;

@@ -38,7 +38,7 @@
 	<h3>参照</h3>
 	取得したい値のキー<input type="text" id="selectkey" />
 	<input type="button" value="取得" onclick="getValue()"/>
-	<input type="button" value="全取得" onclick="getAll()"/>
+	<!--<input type="button" value="全取得" onclick="getAll()"/> -->
 	<input type="button" value="件数表示" onclick="getCount()"/>
 	<hr />
 	
@@ -54,14 +54,15 @@
 	<hr />
 	-->
 	<div id="addDetails">
-		<details>
-			<summary>test</summary>
-				test
-		</details>
+		<!--<details>
+			<summary>test1</summary>
+				<p>test2</p>
+		</details> -->
 	</div>	
 		
 	<h3>処理結果</h3>
 	<div id="result">
+		
 </body>
 
 <script>
@@ -92,10 +93,14 @@
 		openRequest.onsuccess = function(event) {
 	        db = event.target.result;
 			Onload();
+			getAll();
         }
 	} else {
 		window.alert("このブラウザではIndexed DataBase API は使えません。");
 	}
+
+
+	
 
 	
 	function setValue(event) {
@@ -164,7 +169,8 @@
 			
 			var cursor = event.target.result;
 	        var data = cursor.value;
-			result.innerHTML += "key："  + cursor.key +  "  value：" + data.myvalue + "<br/>";
+			showMemo({summary:cursor.key, detail:data.myvalue});
+			//result.innerHTML += "key："  + cursor.key +  "  value：" + data.myvalue + "<br/>";
 			
 			cursor.continue();
 		}

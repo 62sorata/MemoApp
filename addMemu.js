@@ -115,3 +115,48 @@ function deleteTag() {
     window.alert("そのタグはありません。");
     
 }
+
+// data -> summary, detail
+function showMemo(data) {  //メモを表示する関数
+    let parentDiv = document.getElementById("addDetails");
+    let addDetailes = document.createElement("details");
+    let addSummary = document.createElement("summary");
+    let addDetail = document.createElement("p");
+
+    var MailText = "";
+
+	for (let i = 0; i < 1000; i++) {  //本文の上限の1000文字まで繰り返す
+		if(data.detail.slice(i,i+1) === undefined) {
+			//本文を読み込みきった場合はループから出る。
+			break;
+		}
+        //エスケープ処理
+		if(data.detail.slice(i,i+1) === "\n") {
+			//改行があった場合
+			MailText = MailText + "<br/>";
+		}else if(data.detail.slice(i,i+1) === "<"){
+            MailText = MailText + "&lt";
+        }else if(data.detail.slice(i,i+1) === ">"){
+            MailText = MailText + "&gt";
+        }else if(data.detail.slice(i,i+1) === "&"){
+            MailText = MailText + "&amp";
+        }else if(data.detail.slice(i,i+1) === "\""){
+            MailText = MailText + "&quot";
+        }else if(data.detail.slice(i,i+1) === "'"){
+            MailText = MailText + "&prime;";
+        }else if(data.detail.slice(i,i+1) === "\\"){
+            MailText = MailText + "&#47;";
+        }else{
+			MailText = MailText + data.detail.slice(i,i+1);
+		}
+	}
+
+    addSummary.innerHTML = data.summary;
+    addDetail.innerHTML = MailText;
+
+    addDetailes.appendChild(addSummary);
+    addDetailes.appendChild(addDetail);
+
+    parentDiv.appendChild(addDetailes);
+
+}

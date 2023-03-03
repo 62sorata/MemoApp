@@ -1,7 +1,7 @@
 var count = 0;
 var tagArr = [];
 
-function Onload(event) {  //ページ読み込み時に呼ばれる関数
+function Onload() {  //ページ読み込み時に呼ばれる関数
     
     
     

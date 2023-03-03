@@ -7,58 +7,66 @@
 	<!-- Bootstrap導入 -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
 
 	<!-- 別ファイルの呼び出し -->
-	<script src = "addMemu.js"></script>
+	<link href="style.css" rel="stylesheet">
+	<script src = "AddMemu.js"></script>
+	<script src = "ShowTag.js"></script>  
 </head>
 <body>
 	
-	<ul id="addTag" class="nav nav-tabs nav-justified">
-		<a id="Tag" href="#" class="nav-link">全てのメモ</a>
-	</ul>
-
-	<h3>タグの追加</h3>
-		新しいタグの追加・削除<br />
-		<input type="text" id="tag" /> 
-		<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
-		<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
-	<hr />
+	<div id="main" class = "pege">
+		<ul id="addTag" class="nav nav-tabs nav-justified">
+			<a id="Tag" href="#" class="nav-link" onclick="showMainTag()">全てのメモ</a>
+		</ul>
 	
-	<h3>登録・更新</h3>
-		件名<input type="text" id="newkey" /> 
-		<br>
-		本文
-    	<form action="#">
-        	<textarea id="newvalue" name="本文" rows="3" cols="50" wrap="hard"></textarea>
-    	</form>
-		<input type="button" value="設定" onclick="setValue()"/>
+		<h3>タグの追加</h3>
+			新しいタグの追加・削除<br />
+			<input type="text" id="tag" /> 
+			<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
+			<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
 		<hr />
+		
+		<h3>登録・更新</h3>
+			件名<input type="text" id="newkey" /> 
+			<br>
+			本文
+			<form action="#">
+				<textarea id="newvalue" name="本文" rows="3" cols="50" wrap="hard"></textarea>
+			</form>
+			<input type="button" value="設定" onclick="setValue()"/>
+		<hr />
+		
+		<h3>参照</h3>
+			取得したい値のキー<input type="text" id="selectkey" />
+			<input type="button" value="取得" onclick="getValue()"/>
+			<!--<input type="button" value="全取得" onclick="getAll()"/> -->
+			<input type="button" value="件数表示" onclick="getCount()"/>
+		<hr />
+		
+		<h3>削除</h3>
+			削除したい値のキー<input type="text" id="deletekey" />
+			<input type="button" value="削除" onclick="deleteValue()"/>
+			<input type="button" value="全削除" onclick="deleteAll()"/>
+		<hr />
+
+		<!--
+		<h3>インデックスを使った検索</h3>
+		<input type="text" id="selectValue1" />～<input type="text" id="selectValue2" />
+		<input type="button" value="検索" onclick="getKey()"/>
+		<hr />
+		-->
+		<div id="mainTag">
+			<div id="addDetails">
+				<!--<details>
+					<summary>test1</summary>
+						<p>test2</p>
+				</details> -->
+			</div>	
+		</div>
+	</div>
 	
-	<h3>参照</h3>
-	取得したい値のキー<input type="text" id="selectkey" />
-	<input type="button" value="取得" onclick="getValue()"/>
-	<!--<input type="button" value="全取得" onclick="getAll()"/> -->
-	<input type="button" value="件数表示" onclick="getCount()"/>
-	<hr />
-	
-	<h3>削除</h3>
-	削除したい値のキー<input type="text" id="deletekey" />
-	<input type="button" value="削除" onclick="deleteValue()"/>
-	<input type="button" value="全削除" onclick="deleteAll()"/>
-	<hr />
-	<!--
-	<h3>インデックスを使った検索</h3>
-	<input type="text" id="selectValue1" />～<input type="text" id="selectValue2" />
-	<input type="button" value="検索" onclick="getKey()"/>
-	<hr />
-	-->
-	<div id="addDetails">
-		<!--<details>
-			<summary>test1</summary>
-				<p>test2</p>
-		</details> -->
-	</div>	
 		
 	<h3>処理結果</h3>
 	<div id="result">
@@ -68,6 +76,9 @@
 <script>
 	var db;
 	var indexedDB = window.indexedDB || window.mozIndexedDB || window.msIndexedDB;
+
+	let mainTag = document.getElementById("mainTag");  //のID取得
+
 	if (indexedDB) {
 		// データベースを削除したい場合はコメントを外します。
 		//indexedDB.deleteDatabase("mydb");
@@ -92,6 +103,7 @@
 		
 		openRequest.onsuccess = function(event) {
 	        db = event.target.result;
+			//mainTag.classList.remove("d-none");
 			Onload();
 			getAll();
         }
@@ -110,6 +122,16 @@
 		
 		var transaction = db.transaction(["mystore"], "readwrite");
 		var store = transaction.objectStore("mystore");
+
+		let keyFlag = store.get(key);  //入力したKEYがすでにある場合
+		keyFlag.onsuccess = function (event) {
+			if (event.target.result !== undefined) {
+				let target = document.getElementById(key);  //入力した内容がIDになっている
+				target.remove();
+			}
+		}
+		
+		showMemo({summary:key, detail:value, tabNum:null});
 		
 		var request = store.put({ mykey: key, myvalue: value});
 		request.onsuccess = function (event) {
@@ -169,7 +191,7 @@
 			
 			var cursor = event.target.result;
 	        var data = cursor.value;
-			showMemo({summary:cursor.key, detail:data.myvalue});
+			showMemo({summary:cursor.key, detail:data.myvalue, tabNum:null});
 			//result.innerHTML += "key："  + cursor.key +  "  value：" + data.myvalue + "<br/>";
 			
 			cursor.continue();

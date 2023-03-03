@@ -26,6 +26,7 @@ function Onload(event) {  //ページ読み込み時に呼ばれる関数
             newElement.setAttribute("herf","#");  //a要素にherfを設定
             newElement.setAttribute("class","nav-link");  //a要素にclassの設定
             newElement.setAttribute("id","listId"+count);  //a要素にIdの設定
+            newElement.setAttribute("onclick", "showTag()");
             var addTaget = document.getElementById("addTag");  //親要素の参照
             var MainTag = document.getElementById("Tag");
             addTaget.insertBefore(newElement, MainTag.nextSibling);
@@ -56,12 +57,13 @@ function addTage() {
     }
 
     var newElement = document.createElement("a"); //a要素の作成
-    var newContent = document.createTextNode("#"+newTag);  //タグの内容
+    var newContent = document.createTextNode("\#"+newTag);  //タグの内容
     //console.log(newContent);
     newElement.appendChild(newContent);  //a要素にテキスト追加
     newElement.setAttribute("herf","#");  //a要素にherfを設定
     newElement.setAttribute("class","nav-link");  //a要素にclassの設定
     newElement.setAttribute("id","listId"+count);  //a要素にIdの設定
+    newElement.setAttribute("onclick", "showTag()");
 
     var addTaget = document.getElementById("addTag");  //親要素の参照
     var MainTag = document.getElementById("Tag");
@@ -116,14 +118,18 @@ function deleteTag() {
     
 }
 
-// data -> summary, detail
+// data -> summary, detail, tabNum
 function showMemo(data) {  //メモを表示する関数
     let parentDiv = document.getElementById("addDetails");
     let addDetailes = document.createElement("details");
+    addDetailes.setAttribute("id",data.summary);
     let addSummary = document.createElement("summary");
     let addDetail = document.createElement("p");
 
-    var MailText = "";
+    let MailText = "";
+    let showMemoFlag = 0;  //フラグ管理
+    let tagConf = "";  //書かれているタグを保持する
+    let showFlag = 0;
 
 	for (let i = 0; i < 1000; i++) {  //本文の上限の1000文字まで繰り返す
 		if(data.detail.slice(i,i+1) === undefined) {
@@ -134,6 +140,7 @@ function showMemo(data) {  //メモを表示する関数
 		if(data.detail.slice(i,i+1) === "\n") {
 			//改行があった場合
 			MailText = MailText + "<br/>";
+            showMemoFlag = 2;
 		}else if(data.detail.slice(i,i+1) === "<"){
             MailText = MailText + "&lt";
         }else if(data.detail.slice(i,i+1) === ">"){
@@ -149,7 +156,31 @@ function showMemo(data) {  //メモを表示する関数
         }else{
 			MailText = MailText + data.detail.slice(i,i+1);
 		}
+
+        if(data.tabNum != null) {
+            if(showMemoFlag == 0) {  //#があればタグを読むようにフラグを立てる
+                if(data.detail.slice(i,i+1) === "\#"){
+                    showMemoFlag = 1;
+                }
+            }else if(showMemoFlag == 1) {  //フラグが立っていればタグを読む
+                tagConf = tagConf + data.detail.slice(i,i+1);
+            }else if(showMemoFlag == 2) {
+                if(tagConf == tagArr[data.tabNum]) {
+                    showFlag = 1;
+                    tagConf = "";
+                    showMemoFlag = 0;
+                }
+            }
+        }
+        
 	}
+
+    if(data.tabNum != null){
+        if(showFlag != 1) {
+            return;
+        }
+    }
+    
 
     addSummary.innerHTML = data.summary;
     addDetail.innerHTML = MailText;

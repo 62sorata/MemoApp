@@ -7,7 +7,7 @@
 	<!-- Bootstrap導入 -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>  -->
+    <script src="js/bootstrap.min.js"></script>   -->
 
 	<!-- 別ファイルの呼び出し -->
 	<link href="style.css" rel="stylesheet">
@@ -40,12 +40,15 @@
 					<input type="button" value="設定" onclick="setValue()"/>
 				<hr />
 				
+				<!--
 				<h3>参照</h3>
 					取得したい値のキー<input type="text" id="selectkey" />
 					<input type="button" value="取得" onclick="getValue()"/>
-					<!--<input type="button" value="全取得" onclick="getAll()"/> -->
+					<input type="button" value="全取得" onclick="getAll()"/>
 					<input type="button" value="件数表示" onclick="getCount()"/>
 				<hr />
+
+				-->
 				
 				<h3>削除</h3>
 					削除したい値のキー<input type="text" id="deletekey" />
@@ -53,7 +56,12 @@
 					<input type="button" value="全削除" onclick="deleteAll()"/>
 				<hr />
 
-			</div>
+				
+				<h3>処理結果</h3>
+					<div id="result">
+						<br>
+						<br>
+					</div>
 		</div>
 
 		<!--
@@ -71,11 +79,11 @@
 				</details> -->
 			</div>	
 		</div>
+
 	</div>
 	
 		
-	<h3>処理結果</h3>
-	<div id="result">
+	
 		
 </body>
 

@@ -127,12 +127,36 @@ function showMemo(data) {  //メモを表示する関数
     let addDetail = document.createElement("p");
 
     let MailText = "";
+    let mailSubject = "";  //件名を保持する変数
     let showMemoFlag = 0;  //フラグ管理
     let tagConf = "";  //書かれているタグを保持する
     let showFlag = 0;
 
+    for(let i=0; i< 100; i++) {  //件名の上限100文字まで繰り返す
+        if(data.summary.slice(i,i+1) == "") {  //件名を読み切ったらループから外れる
+            break;
+        }
+        //エスケープ処理
+        if(data.summary.slice(i,i+1) == "<"){
+            mailSubject = mailSubject + "&lt";
+        }else if(data.summary.slice(i,i+1) === ">"){
+            mailSubject = mailSubject + "&gt";
+        }else if(data.summary.slice(i,i+1) === "&"){
+            mailSubject = mailSubject + "&amp";
+        }else if(data.summary.slice(i,i+1) === "\""){
+            mailSubject = mailSubject + "&quot";
+        }else if(data.summary.slice(i,i+1) === "'"){
+            mailSubject = mailSubject + "&prime;";
+        }else if(data.summary.slice(i,i+1) === "\\"){
+            mailSubject = mailSubject + "&#47;";
+        }else{
+			mailSubject = mailSubject + data.summary.slice(i,i+1);
+		}
+    }
+
 	for (let i = 0; i < 1000; i++) {  //本文の上限の1000文字まで繰り返す
-		if(data.detail.slice(i,i+1) === undefined) {
+        //console.log(data.detail.slice(i,i+1));
+		if(data.detail.slice(i,i+1) == "") {
 			//本文を読み込みきった場合はループから出る。
 			break;
 		}
@@ -140,7 +164,9 @@ function showMemo(data) {  //メモを表示する関数
 		if(data.detail.slice(i,i+1) === "\n") {
 			//改行があった場合
 			MailText = MailText + "<br/>";
-            showMemoFlag = 2;
+            if(showMemoFlag == 1) {
+                showMemoFlag = 2;
+            }
 		}else if(data.detail.slice(i,i+1) === "<"){
             MailText = MailText + "&lt";
         }else if(data.detail.slice(i,i+1) === ">"){
@@ -164,6 +190,13 @@ function showMemo(data) {  //メモを表示する関数
                 }
             }else if(showMemoFlag == 1) {  //フラグが立っていればタグを読む
                 tagConf = tagConf + data.detail.slice(i,i+1);
+                if(data.detail.slice(i+1,i+2) == "") {
+                    if(tagConf == tagArr[data.tabNum]) {
+                        showFlag = 1;
+                        tagConf = "";
+                        showMemoFlag = 0;
+                    }
+                }
             }else if(showMemoFlag == 2) {
                 if(tagConf == tagArr[data.tabNum]) {
                     showFlag = 1;
@@ -182,7 +215,7 @@ function showMemo(data) {  //メモを表示する関数
     }
     
 
-    addSummary.innerHTML = data.summary;
+    addSummary.innerHTML = mailSubject;
     addDetail.innerHTML = MailText;
 
     addDetailes.appendChild(addSummary);

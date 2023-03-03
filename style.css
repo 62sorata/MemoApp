@@ -1,5 +1,9 @@
 @import "https://use.fontawesome.com/releases/v5.13.0/css/all.css";
 
+html {
+    background-color: #88A0A8;  /*背景色*/
+}
+
 .pege {  /*メインの指定*/
     background-color: #88A0A8;  /*背景色*/
 }

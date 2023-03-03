@@ -6,13 +6,13 @@
 	<title>MemoApp</title>
 	<!-- Bootstrap導入 -->
 	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script> 
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>  -->
 
 	<!-- 別ファイルの呼び出し -->
 	<link href="style.css" rel="stylesheet">
-	<script src = "AddMemu.js"></script>
-	<script src = "ShowTag.js"></script>  
+	<script src = "./AddMemu.js"></script>
+	<script src = "./ShowTag.js"></script>  
 </head>
 <body>
 	
@@ -21,35 +21,40 @@
 			<a id="Tag" href="#" class="nav-link" onclick="showMainTag()">全てのメモ</a>
 		</ul>
 	
-		<h3>タグの追加</h3>
-			新しいタグの追加・削除<br />
-			<input type="text" id="tag" /> 
-			<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
-			<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
-		<hr />
-		
-		<h3>登録・更新</h3>
-			件名<input type="text" id="newkey" /> 
-			<br>
-			本文
-			<form action="#">
-				<textarea id="newvalue" name="本文" rows="3" cols="50" wrap="hard"></textarea>
-			</form>
-			<input type="button" value="設定" onclick="setValue()"/>
-		<hr />
-		
-		<h3>参照</h3>
-			取得したい値のキー<input type="text" id="selectkey" />
-			<input type="button" value="取得" onclick="getValue()"/>
-			<!--<input type="button" value="全取得" onclick="getAll()"/> -->
-			<input type="button" value="件数表示" onclick="getCount()"/>
-		<hr />
-		
-		<h3>削除</h3>
-			削除したい値のキー<input type="text" id="deletekey" />
-			<input type="button" value="削除" onclick="deleteValue()"/>
-			<input type="button" value="全削除" onclick="deleteAll()"/>
-		<hr />
+		<div id="showInputMemo" class="d-none">
+			<div class = "fontColor">
+				<h3>タグの追加</h3>
+					新しいタグの追加・削除<br />
+					<input type="text" id="tag" /> 
+					<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
+					<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
+				<hr />
+
+				<h3>登録・更新</h3>
+					件名<input type="text" id="newkey" /> 
+					<br>
+					本文
+					<form action="#">
+						<textarea id="newvalue" name="本文" rows="3" cols="50" wrap="hard"></textarea>
+					</form>
+					<input type="button" value="設定" onclick="setValue()"/>
+				<hr />
+				
+				<h3>参照</h3>
+					取得したい値のキー<input type="text" id="selectkey" />
+					<input type="button" value="取得" onclick="getValue()"/>
+					<!--<input type="button" value="全取得" onclick="getAll()"/> -->
+					<input type="button" value="件数表示" onclick="getCount()"/>
+				<hr />
+				
+				<h3>削除</h3>
+					削除したい値のキー<input type="text" id="deletekey" />
+					<input type="button" value="削除" onclick="deleteValue()"/>
+					<input type="button" value="全削除" onclick="deleteAll()"/>
+				<hr />
+
+			</div>
+		</div>
 
 		<!--
 		<h3>インデックスを使った検索</h3>
@@ -57,6 +62,7 @@
 		<input type="button" value="検索" onclick="getKey()"/>
 		<hr />
 		-->
+		
 		<div id="mainTag">
 			<div id="addDetails">
 				<!--<details>
@@ -78,6 +84,7 @@
 	var indexedDB = window.indexedDB || window.mozIndexedDB || window.msIndexedDB;
 
 	let mainTag = document.getElementById("mainTag");  //のID取得
+	let inputMemoVar = document.getElementById("showInputMemo");  //のID取得
 
 	if (indexedDB) {
 		// データベースを削除したい場合はコメントを外します。
@@ -104,6 +111,7 @@
 		openRequest.onsuccess = function(event) {
 	        db = event.target.result;
 			//mainTag.classList.remove("d-none");
+			inputMemoVar.classList.remove("d-none");
 			Onload();
 			getAll();
         }

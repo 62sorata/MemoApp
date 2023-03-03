@@ -191,3 +191,5 @@ function showMemo(data) {  //メモを表示する関数
     parentDiv.appendChild(addDetailes);
 
 }
+
+

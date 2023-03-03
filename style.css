@@ -1,0 +1,12 @@
+@import "https://use.fontawesome.com/releases/v5.13.0/css/all.css";
+
+.pege {  /*メインの指定*/
+    background-color: #88A0A8;  /*背景色*/
+}
+
+h3 {
+    font-size: 30px;  /*文字の色*/
+    color: #DBD3C9;
+}
+
+

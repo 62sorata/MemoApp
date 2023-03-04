@@ -7,7 +7,26 @@ html {
 .pege {  /*メインの指定*/
     background-color: #88A0A8;  /*背景色*/
 }
+/*
+ul {
+    background-color: #546A76;
+}
+*/
 
+.tabUnder a {
+    text-decoration: none;  /*aタグのアンダーバーを消す*/
+}
+
+.tabUnder a {  /*タブの色*/
+    color: #FAD4D8;
+}
+.tabUnder a:hover {  /*　タブの下線部の表示  */
+    color: #DBD3C9;
+    text-decoration: underline;
+    text-decoration-color: #B4CEB3;
+    text-decoration-thickness: 5px;
+    background-color: #546A76;
+}
 h3 {
     font-size: 30px;  /*文字の色*/
     color: #DBD3C9;

@@ -337,6 +337,17 @@
 
 let opt = {};  //オプションの指定
 shortcut.add("Shift+Enter",showInput,opt);
+shortcut.add("Backspace",tabDelet,opt);
+
+
+
+function tabDelet() {
+	console.log(showMemoFlag);
+	if(showMemoFlag == 1) {
+		deleteTag();
+		document.getElementById("tag").value = "";
+	}
+}
 
 
 

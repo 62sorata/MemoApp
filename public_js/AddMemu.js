@@ -243,3 +243,22 @@ function showMemo(data) {  //メモを表示する関数
 }
 
 
+//タグをクリックしたらそのタグがテクストボックスに入るようにする
+let mainPage = document.getElementById("main");
+
+//ページ全体でクリックされているところを探す
+mainPage.addEventListener("click", (event) => {
+    
+    let clickElemeId = String(event.target.id);  //クリックされた要素のIDを取得
+    
+    if(String(clickElemeId.slice(0,6)) == "listId") {  //タグがクリックされた場合
+        selectTag({value:clickElemeId.slice(6)});
+        console.log(clickElemeId.slice(0,6));
+    }
+    
+} )
+
+//data -> value:配列の番号
+function selectTag(data) {
+    document.getElementById("tag").value = tagArr[data.value];
+}

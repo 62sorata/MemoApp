@@ -279,6 +279,12 @@
 		request.onsuccess = function (event) {
 			result.innerHTML = "クリアしました。";
 		}
+
+		let parentDiv = document.getElementById("addDetails");
+
+		while (parentDiv.firstChild) {
+        	parentDiv.removeChild(parentDiv.firstChild);
+    	}
 	}
 	
 	function getKey(event) {

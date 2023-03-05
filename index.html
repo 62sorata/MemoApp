@@ -54,17 +54,14 @@
 				-->
 				
 				<h3>削除</h3>
-					削除したい値のキー<input type="text" id="deletekey" />
+					削除したい件名を入力<br>
+					<input type="text" id="deletekey" />
 					<input type="button" value="削除" onclick="deleteValue()"/>
 					<input type="button" value="全削除" onclick="deleteAll()"/>
+					<div id="result"></div>
 				<hr />
 		
-				
-				<h3>処理結果</h3>
-					<div id="result">
-						<br>
-						<br>
-					</div>
+
 			</div>
 		</div>
 
@@ -316,7 +313,7 @@
 			showMemoFlag = 1;
 		}else if(showMemoFlag == 1) {
 			inputMemoVar.classList.add("d-none");
-			showInputId.value = "NEWMEMO";
+			showInputId.value = "MEMU";
 			showMemoFlag = 0;
 		}
 		

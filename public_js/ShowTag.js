@@ -1,6 +1,14 @@
 //let mainTag = document.getElementById("mainTag");  //のID取得
 let tagIdName = "";
 
+let mainId = document.getElementById("addTag");
+
+mainId.addEventListener("click", (event) => {
+    tagIdName = String(event.target.id);  //クリックしたタグのIDを取得
+    showTag();
+} )
+
+
 
 
 function showTag() {
@@ -9,17 +17,8 @@ function showTag() {
     while (parentDiv.firstChild) {
         parentDiv.removeChild(parentDiv.firstChild);
     }
-    let mainId = document.getElementById("main");
-    //let mainTag = document.getElementById("mainTag");  //のID取得
-    //mainTag.classList.add("d-none");
-
-    mainId.addEventListener("click", (event) => {
-        tagIdName = String(event.target.id);  //クリックしたタグのIDを取得
-    } )
-
+    
     let tagIdNum = tagIdName.slice(6);  //タブの番号を取得
-
-    console.log(tagIdName);
 
     var transaction = db.transaction(["mystore"], "readwrite");
 	var store = transaction.objectStore("mystore");

@@ -2,8 +2,6 @@
 
 html {
     background-color: #88A0A8;  /*背景色*/
-    position: relative;
-    left: 10px;
 }
 
 .pege {  /*メインの指定*/
@@ -29,6 +27,16 @@ ul {
     text-decoration-thickness: 5px;
     background-color: #546A76;
 }
+
+.memu {
+    position: relative;
+    left: 10px;
+}
+.showMemo {
+    position: relative;
+    left: 10px;
+}
+
 h3 {
     font-size: 30px;  /*文字の色*/
     color: #DBD3C9;

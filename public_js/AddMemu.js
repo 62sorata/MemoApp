@@ -65,6 +65,7 @@ function addTage() {
 
     request.onsuccess = function (event) {
         document.getElementById("tag").value = "";
+        result.innerHTML = "追加しました。";
     }
 
     var newElement = document.createElement("a"); //a要素の作成
@@ -96,6 +97,7 @@ function deleteTag() {
         if(delTag == tagArr[n]) {  //入力したものがタグにあった場合
             delcount = 1;
             target.remove();  //指定したIDの要素を削除
+            result.innerHTML = "削除しました。";
         }
         
         if(delcount == 1) { //リストを消した場合、配列をずらす必要がある。

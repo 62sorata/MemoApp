@@ -244,6 +244,9 @@
 		
 		var transaction = db.transaction(["mystore"], "readwrite");
 		var store = transaction.objectStore("mystore");
+
+		let delValue = document.getElementById(key);  //件名と同じIDを取得
+		delValue.remove();
 		
 		var request = store.delete(key);
 		request.onsuccess = function (event) {

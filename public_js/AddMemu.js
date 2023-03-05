@@ -26,7 +26,6 @@ function Onload() {  //ページ読み込み時に呼ばれる関数
             newElement.setAttribute("herf","#");  //a要素にherfを設定
             newElement.setAttribute("class","nav-link");  //a要素にclassの設定
             newElement.setAttribute("id","listId"+count);  //a要素にIdの設定
-            newElement.setAttribute("onclick", "showTag()");
             var addTaget = document.getElementById("addTag");  //親要素の参照
             var MainTag = document.getElementById("Tag");
             addTaget.insertBefore(newElement, MainTag.nextSibling);

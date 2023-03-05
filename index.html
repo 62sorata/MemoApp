@@ -35,7 +35,7 @@
 				<hr />
 
 				<h3>登録・更新</h3>
-					件名<input type="text" id="newkey" /> 
+					件名<input type="text" id="newkey"/> 
 					<br>
 					本文
 					<form action="#">
@@ -91,7 +91,7 @@
 <script src = "./public_js/AddMemu.js"></script>
 <script src = "./public_js/ShowTag.js"></script> 
 
-<script type="text/javascript" src="./public_js/shortcut.js"></script>
+<script src="./public_js/shortcut.js"></script>
 
 <script>
 	var db;
@@ -324,13 +324,19 @@
 			inputMemoVar.classList.remove("d-none");  //メモ入力画面の表示
 			showInputId.value = "CLOSE";
 			showMemoFlag = 1;
+			document.getElementById("newkey").focus();
 		}else if(showMemoFlag == 1) {
 			inputMemoVar.classList.add("d-none");
 			showInputId.value = "MEMU";
 			showMemoFlag = 0;
 		}
-		
 	}
+
+
+	//ショートカットキー処理
+
+let opt = {};  //オプションの指定
+shortcut.add("Shift+Enter",showInput,opt);
 
 
 

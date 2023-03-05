@@ -200,6 +200,9 @@ function showMemo(data) {  //メモを表示する関数
                     showFlag = 1;
                     tagConf = "";
                     showMemoFlag = 0;
+                }else{
+                    tagConf = "";
+                    showMemoFlag = 0;
                 }
             }
         }

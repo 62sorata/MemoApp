@@ -22,6 +22,10 @@
 				<a id="Tag" href="#" class="nav-link" onclick="showMainTag()">全てのメモ</a>
 			</ul>
 		</div>
+
+		<div>  <!--メモを表示・非表示にするためのボタン-->
+			<input type="button" id="showInput" value="NEWMEMO" onclick="showInput()">
+		</div>
 	
 		<div id="showInputMemo" class="d-none">
 			<div class = "fontColor">
@@ -57,13 +61,14 @@
 					<input type="button" value="削除" onclick="deleteValue()"/>
 					<input type="button" value="全削除" onclick="deleteAll()"/>
 				<hr />
-
+		
 				
 				<h3>処理結果</h3>
 					<div id="result">
 						<br>
 						<br>
 					</div>
+			</div>
 		</div>
 
 		<!--
@@ -121,7 +126,7 @@
 		openRequest.onsuccess = function(event) {
 	        db = event.target.result;
 			//mainTag.classList.remove("d-none");
-			inputMemoVar.classList.remove("d-none");
+			//inputMemoVar.classList.remove("d-none");
 			Onload();
 			getAll();
         }
@@ -285,6 +290,22 @@
 			
 			cursor.continue();
 		}
+	}
+
+	let showMemoFlag = 0;
+
+	function showInput() {
+		let showInputId = document.getElementById("showInput");
+		if (showMemoFlag == 0) {
+			inputMemoVar.classList.remove("d-none");  //メモ入力画面の表示
+			showInputId.value = "CLOSE";
+			showMemoFlag = 1;
+		}else if(showMemoFlag == 1) {
+			inputMemoVar.classList.add("d-none");
+			showInputId.value = "NEWMEMO";
+			showMemoFlag = 0;
+		}
+		
 	}
 
 </script>

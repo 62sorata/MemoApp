@@ -44,6 +44,18 @@ function addTage() {
     if(newTag == "") {
         return;
     }
+    
+    let confValue = 0;
+    while(1) {
+        if(newTag.slice(confValue,confValue+1) == "") {
+            break;
+        }else if(newTag.slice(confValue,confValue+1) == "#") { //タグに＃が含まれていた場合
+            window.alert("タグ名に＃を入力するのはやめてください");
+            return;
+        }
+        confValue++;
+
+    }
 
     tagArr[count] = newTag;  //配列に一時保存
 
@@ -129,6 +141,11 @@ function showMemo(data) {  //メモを表示する関数
     let showMemoFlag = 0;  //フラグ管理
     let tagConf = "";  //書かれているタグを保持する
     let showFlag = 0;
+
+    if(data.summary == "") {  //件名が空白だった場合
+        window.alert("件名を入力してください");
+        return;
+    }
 
     for(let i=0; i< 100; i++) {  //件名の上限100文字まで繰り返す
         if(data.summary.slice(i,i+1) == "") {  //件名を読み切ったらループから外れる

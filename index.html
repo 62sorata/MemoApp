@@ -251,13 +251,27 @@
 		var transaction = db.transaction(["mystore"], "readwrite");
 		var store = transaction.objectStore("mystore");
 
-		let delValue = document.getElementById(key);  //件名と同じIDを取得
-		delValue.remove();
-		
-		var request = store.delete(key);
+		let request = store.get(key);
+
 		request.onsuccess = function (event) {
-			result.innerHTML = "削除しました。";
+			if (event.target.result === undefined) {
+				return;
+			}else {
+				let delValue = document.getElementById(key);  //件名と同じIDを取得
+				delValue.remove();
+			}
 		}
+		
+		request = store.delete(key);
+		request.onsuccess = function (event) {
+			console.log(event.target.result);
+			result.innerHTML = "削除しました。";
+			
+		}
+
+		
+		
+		
 	}
 	
 	function deleteAll(event) {

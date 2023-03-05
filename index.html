@@ -150,7 +150,10 @@
 		var key = document.getElementById("newkey").value;
 		var value = document.getElementById("newvalue").value;
         //件名と本文の取得
-		
+		if(key == "") {  //件名が空白だった場合
+        	window.alert("件名を入力してください");
+        	return;
+    	}
 		var transaction = db.transaction(["mystore"], "readwrite");
 		var store = transaction.objectStore("mystore");
 

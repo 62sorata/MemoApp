@@ -2,6 +2,8 @@
 
 html {
     background-color: #88A0A8;  /*背景色*/
+    position: relative;
+    left: 10px;
 }
 
 .pege {  /*メインの指定*/

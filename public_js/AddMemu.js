@@ -142,10 +142,7 @@ function showMemo(data) {  //メモを表示する関数
     let tagConf = "";  //書かれているタグを保持する
     let showFlag = 0;
 
-    if(data.summary == "") {  //件名が空白だった場合
-        window.alert("件名を入力してください");
-        return;
-    }
+    
 
     for(let i=0; i< 100; i++) {  //件名の上限100文字まで繰り返す
         if(data.summary.slice(i,i+1) == "") {  //件名を読み切ったらループから外れる

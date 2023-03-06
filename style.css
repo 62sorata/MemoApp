@@ -14,11 +14,21 @@ html {
     margin-right: 10px;
 }
 
-/*
-ul {
-    background-color: #546A76;
+.reset {
+    color: black;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    border: none;
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
 }
-*/
 
 .tabUnder a {
     text-decoration: none;  /*aタグのアンダーバーを消す*/
@@ -35,7 +45,36 @@ ul {
     background-color: #546A76;
 }
 
+.memu {
+    position: relative;
+    text-align: center;
+    /* 中央揃え */
+    display: block;
+    margin: 0 auto;
+    /* 幅の指定 */
+    width: 100%;
+    max-width: 200px;
+    box-sizing: border-box;
+    padding: 10px;
+    /* 色の指定 */
+    background: linear-gradient(135deg, #DBD3C9, #FAD4D8);
+    color: #546A76;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+
+.memu:hover {
+    opacity: 0.7;
+}
+
+
+.memu:active, memo:focus {
+    top: 2px;
+}
     
+
 .showMemo {
     position: relative;
     left: 10px;

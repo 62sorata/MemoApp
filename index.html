@@ -47,7 +47,7 @@
 						<form action="#">
 							<textarea id="newvalue" name="本文" rows="3" cols="100" wrap="hard"></textarea>
 						</form>
-						<input type="button" value="設定" onclick="setValue()"/>
+						<input type="button" value="設定(Ctrl+Enter)" onclick="setValue()"/>
 					<hr />
 					
 					<h3>削除</h3>
@@ -346,8 +346,9 @@
 	//ショートカットキー処理
 
 let opt = {};  //オプションの指定
-shortcut.add("Shift+Enter",showInput,opt);
-shortcut.add("Shift+Backspace",tabDelet,opt);
+shortcut.add("Shift+Enter",showInput,opt);  //編集画面の開閉
+shortcut.add("Shift+Backspace",tabDelet,opt);  //タグの削除
+shortcut.add("Ctrl+Enter",setValue,opt);	//メモの追加
 
 
 

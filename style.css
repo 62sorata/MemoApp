@@ -101,3 +101,8 @@ p .tagText {
     font-size: 30px;
     color: #DBD3C9;
 }
+
+
+textarea {
+    width: 95%;
+}

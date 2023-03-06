@@ -240,8 +240,8 @@ function showMemo(data) {  //メモを表示する関数
     addDetailes.appendChild(addDetail);
 
     addDetailes.onclick = function(event){
-        newKeyInput.value = mailSubject;
-        newValueInput.value = MailText;
+        newKeyInput.value = data.summary;
+        newValueInput.value = data.detail;
     }
     
     parentDiv.appendChild(addDetailes);

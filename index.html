@@ -69,6 +69,7 @@
 			<hr />
 			-->
 
+			<p id="tagText" class="tagName">全てのメモ</p>  <!--指定しているタグの名前を表示-->
 			<div id="mainTag">
 				<div id="addDetails">
 					<!--<details>
@@ -132,6 +133,7 @@
 		
 		openRequest.onsuccess = function(event) {
 	        db = event.target.result;
+			document.getElementById("tagText").textContent = "全てのメモ";
 			//mainTag.classList.remove("d-none");
 			//inputMemoVar.classList.remove("d-none");
 			Onload();

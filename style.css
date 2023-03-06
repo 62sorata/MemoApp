@@ -92,7 +92,12 @@ h3 {
 }
 
 
-.tagText {
-    font-size: 15px;
+p .tagText {
+    font-size: 10px;
 }
 
+
+.tagName {
+    font-size: 30px;
+    color: #DBD3C9;
+}

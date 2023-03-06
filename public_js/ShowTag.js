@@ -33,6 +33,7 @@ function showTag() {
 		var cursor = event.target.result;
         var data = cursor.value;
 		showMemo({summary:cursor.key, detail:data.myvalue, tabNum:tagIdNum});
+        showTagName({value:tagIdNum});
 		
 		cursor.continue();
 	}
@@ -40,12 +41,16 @@ function showTag() {
 
 
 function showMainTag() {
+
     //mainTag.classList.remove("d-none");
     let parentDiv = document.getElementById("addDetails");
 
     while (parentDiv.firstChild) {
         parentDiv.removeChild(parentDiv.firstChild);
     }
+
+    document.getElementById("tagText").textContent = "全てのメモ";
+
 
     var transaction = db.transaction(["mystore"], "readwrite");
 	var store = transaction.objectStore("mystore");
@@ -63,4 +68,5 @@ function showMainTag() {
 		
 		cursor.continue();
 	}
+
 }

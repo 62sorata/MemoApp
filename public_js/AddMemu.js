@@ -223,7 +223,6 @@ function showMemo(data) {  //メモを表示する関数
                 }
             }
         }
-        
     }
 
     if(data.tabNum != null){
@@ -232,7 +231,6 @@ function showMemo(data) {  //メモを表示する関数
         }
     }
     
-
     addSummary.innerHTML = mailSubject;
     addDetail.innerHTML = MailText;
 
@@ -273,4 +271,10 @@ mainPage.addEventListener("click", (event) => {
 //data -> value:配列の番号
 function selectTag(data) {
     document.getElementById("tag").value = tagArr[data.value];
+}
+
+
+//data -> value:配列の番号
+function showTagName(data) {
+    document.getElementById("tagText").textContent = tagArr[data.value];
 }

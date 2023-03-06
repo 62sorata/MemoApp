@@ -7,7 +7,6 @@ function Onload() {  //ページ読み込み時に呼ばれる関数
     
     var transaction = db.transaction(["tagstore"], "readwrite");  
     var store = transaction.objectStore("tagstore");
-    var n=0;
     var request = store.openCursor();
     
     request.onsuccess = function (event) {
@@ -137,7 +136,9 @@ function showMemo(data) {  //メモを表示する関数
     addDetailes.setAttribute("id",data.summary);
     let addSummary = document.createElement("summary");
     let addDetail = document.createElement("p");
-
+    let newKeyInput = document.getElementById("newkey");
+    let newValueInput = document.getElementById("newvalue");
+    
     let MailText = "";
     let mailSubject = "";  //件名を保持する変数
     let showMemoFlag = 0;  //フラグ管理
@@ -164,24 +165,24 @@ function showMemo(data) {  //メモを表示する関数
         }else if(data.summary.slice(i,i+1) === "\\"){
             mailSubject = mailSubject + "&#47;";
         }else{
-			mailSubject = mailSubject + data.summary.slice(i,i+1);
-		}
+            mailSubject = mailSubject + data.summary.slice(i,i+1);
+        }
     }
 
-	for (let i = 0; i < 1000; i++) {  //本文の上限の1000文字まで繰り返す
+    for (let i = 0; i < 1000; i++) {  //本文の上限の1000文字まで繰り返す
         //console.log(data.detail.slice(i,i+1));
-		if(data.detail.slice(i,i+1) == "") {
-			//本文を読み込みきった場合はループから出る。
-			break;
-		}
+        if(data.detail.slice(i,i+1) == "") {
+            //本文を読み込みきった場合はループから出る。
+            break;
+        }
         //エスケープ処理
-		if(data.detail.slice(i,i+1) === "\n") {
-			//改行があった場合
-			MailText = MailText + "<br/>";
+        if(data.detail.slice(i,i+1) === "\n") {
+            //改行があった場合
+            MailText = MailText + "<br/>";
             if(showMemoFlag == 1) {
                 showMemoFlag = 2;
             }
-		}else if(data.detail.slice(i,i+1) === "<"){
+        }else if(data.detail.slice(i,i+1) === "<"){
             MailText = MailText + "&lt";
         }else if(data.detail.slice(i,i+1) === ">"){
             MailText = MailText + "&gt";
@@ -194,8 +195,8 @@ function showMemo(data) {  //メモを表示する関数
         }else if(data.detail.slice(i,i+1) === "\\"){
             MailText = MailText + "&#47;";
         }else{
-			MailText = MailText + data.detail.slice(i,i+1);
-		}
+            MailText = MailText + data.detail.slice(i,i+1);
+        }
 
         if(data.tabNum != null) {
             if(showMemoFlag == 0) {  //#があればタグを読むようにフラグを立てる
@@ -223,7 +224,7 @@ function showMemo(data) {  //メモを表示する関数
             }
         }
         
-	}
+    }
 
     if(data.tabNum != null){
         if(showFlag != 1) {
@@ -238,12 +239,18 @@ function showMemo(data) {  //メモを表示する関数
     addDetailes.appendChild(addSummary);
     addDetailes.appendChild(addDetail);
 
+    addDetailes.onclick = function(event){
+        newKeyInput.value = mailSubject;
+        newValueInput.value = MailText;
+    }
+    
     parentDiv.appendChild(addDetailes);
 
 }
 
 
 //タグをクリックしたらそのタグがテクストボックスに入るようにする
+//メモがクリックされたら件名と本文がテキストボックスに入るようにする
 let mainPage = document.getElementById("main");
 
 //ページ全体でクリックされているところを探す
@@ -253,8 +260,13 @@ mainPage.addEventListener("click", (event) => {
     
     if(String(clickElemeId.slice(0,6)) == "listId") {  //タグがクリックされた場合
         selectTag({value:clickElemeId.slice(6)});
-        console.log(clickElemeId.slice(0,6));
+        //console.log(clickElemeId.slice(0,6));
+        return;
     }
+
+    //メモがクリックされた場合
+    
+		
     
 } )
 

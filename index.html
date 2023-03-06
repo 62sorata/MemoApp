@@ -14,62 +14,65 @@
 <body>
 	
 	<div id="main" class = "pege">
-		<div class="tabUnder">
-			<ul id="addTag" class="nav nav-tabs nav-justified">
-				<a id="Tag" href="#" class="nav-link" onclick="showMainTag()">全てのメモ</a>
-			</ul>
-		</div>
-
-		
-		<div>  <!--メモを表示・非表示にするためのボタン-->
-			<input type="button" id="showInput" value="MEMU" class="memu" onclick="showInput()">
-		</div>
-	
-		<div id="showInputMemo" class="showMemo d-none">
-			<div class = "fontColor">
-				<h3>タグの追加</h3>
-					新しいタグの追加・削除<br />
-					<input type="text" id="tag" /> 
-					<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
-					<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
-				<hr />
-
-				<h3>登録・更新</h3>
-					件名<input type="text" id="newkey"/> 
-					<br>
-					本文
-					<form action="#">
-						<textarea id="newvalue" name="本文" rows="3" cols="50" wrap="hard"></textarea>
-					</form>
-					<input type="button" value="設定" onclick="setValue()"/>
-				<hr />
-				
-				<h3>削除</h3>
-					削除したい件名を入力<br>
-					<input type="text" id="deletekey" />
-					<input type="button" value="削除" onclick="deleteValue()"/>
-					<input type="button" value="全削除" onclick="deleteAll()"/>
-					<div id="result"></div>
-				<hr />
-		
-
+		<div class="systmMain">
+			<div class="tabUnder">
+				<ul id="addTag" class="nav nav-tabs nav-justified">
+					<a id="Tag" href="#" class="nav-link" onclick="showMainTag()">全てのメモ</a>
+				</ul>
 			</div>
-		</div>
-
-		<!--
-		<h3>インデックスを使った検索</h3>
-		<input type="text" id="selectValue1" />～<input type="text" id="selectValue2" />
-		<input type="button" value="検索" onclick="getKey()"/>
-		<hr />
-		-->
 		
-		<div id="mainTag">
-			<div id="addDetails">
-				<!--<details>
-					<summary>test1</summary>
-						<p>test2</p>
-				</details> -->
-			</div>	
+			
+			<div>  <!--メモを表示・非表示にするためのボタン-->
+				<input type="button" id="showInput" value="MEMU" class="memu" onclick="showInput()">
+			</div>
+		
+				<div id="showInputMemo" class="showMemo d-none">
+				<div class = "fontColor">
+					<h3>タグの追加</h3>
+						新しいタグの追加・削除<br />
+						<input type="text" id="tag" /> 
+						<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
+						<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
+					<hr />
+
+					<h3>登録・更新</h3>
+						件名<input type="text" id="newkey"/> 
+						<br>
+						本文
+						<form action="#">
+							<textarea id="newvalue" name="本文" rows="3" cols="100" wrap="hard"></textarea>
+						</form>
+						<input type="button" value="設定" onclick="setValue()"/>
+					<hr />
+					
+					<h3>削除</h3>
+						削除したい件名を入力<br>
+						<input type="text" id="deletekey" />
+						<input type="button" value="削除" onclick="deleteValue()"/>
+						<input type="button" value="全削除" onclick="deleteAll()"/>
+						<div id="result"></div>
+					<hr />
+					
+
+				</div>
+			</div>
+
+			<!--
+			<h3>インデックスを使った検索</h3>
+			<input type="text" id="selectValue1" />～<input type="text" id="selectValue2" />
+			<input type="button" value="検索" onclick="getKey()"/>
+			<hr />
+			-->
+
+			<div id="mainTag">
+				<div id="addDetails">
+					<!--<details>
+						<summary>test1</summary>
+							<p>test2</p>
+					</details> -->
+				</div>	
+			</div>
+
 		</div>
 
 	</div>
@@ -337,7 +340,7 @@
 
 let opt = {};  //オプションの指定
 shortcut.add("Shift+Enter",showInput,opt);
-shortcut.add("Backspace",tabDelet,opt);
+shortcut.add("Shift+Backspace",tabDelet,opt);
 
 
 

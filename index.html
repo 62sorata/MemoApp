@@ -23,23 +23,27 @@
 
 
 			<div>  <!--メモを表示・非表示にするためのボタン-->
-				<input type="button" id="showInput" value="MEMU" class="reset memu" onclick="showInput()">
-
+				<input type="button" id="showInput" value="MEMU（Shift+Enter)" class="reset memu" onclick="showInput()">
 			</div>
 		
 				<div id="showInputMemo" class="showMemo d-none">
 				<div class = "fontColor">
 					<h3>タグの追加</h3>
-						新しいタグの追加・削除<br />
+						<p>新しいタグの追加・削除</p>
 						<input type="text" id="tag" /> 
 						<input type="button" value="new" onclick="addTage()"/> <!--addMemu.jsへ-->
 						<input type="button" value="delete" onclick="deleteTag()"/> <!--addMemu.jsへ-->
+						<p class="tagText">
+							タグをクリックすると選択状態にできる。<br> 
+							Shift+Backspaceでdelete
+						</p>
 					<hr />
 
 					<h3>登録・更新</h3>
-						件名<input type="text" id="newkey"/> 
+						<p>件名</p>
+						<input type="text" id="newkey" size="50"/> 
 						<br>
-						本文
+						<p>本文</p>
 						<form action="#">
 							<textarea id="newvalue" name="本文" rows="3" cols="100" wrap="hard"></textarea>
 						</form>
@@ -47,7 +51,7 @@
 					<hr />
 					
 					<h3>削除</h3>
-						削除したい件名を入力<br>
+						<p>削除したい件名を入力</p>
 						<input type="text" id="deletekey" />
 						<input type="button" value="削除" onclick="deleteValue()"/>
 						<input type="button" value="全削除" onclick="deleteAll()"/>
@@ -326,12 +330,12 @@
 		let showInputId = document.getElementById("showInput");
 		if (showMemoFlag == 0) {
 			inputMemoVar.classList.remove("d-none");  //メモ入力画面の表示
-			showInputId.value = "CLOSE";
+			showInputId.value = "CLOSE（Shift+Enter)";
 			showMemoFlag = 1;
 			document.getElementById("newkey").focus();
 		} else if (showMemoFlag == 1) {
 			inputMemoVar.classList.add("d-none");
-			showInputId.value = "MEMU";
+			showInputId.value = "MEMU（Shift+Enter)";
 			showMemoFlag = 0;
 		}
 	}
